@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#07111f">
+    <title>TripMate AI - Travel Planner</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="page-bg" aria-hidden="true">
+        <div class="gradient-circle circle-1"></div>
+        <div class="gradient-circle circle-2"></div>
+        <div class="gradient-circle circle-3"></div>
+    </div>
+
+    <main class="app-container">
+        <header class="hero-section">
+            <div class="badge">✈️ Your AI-powered travel planner</div>
+            <h1>Plan your next adventure</h1>
+            <p>Tell us where you want to go, when you want to travel, and what you enjoy. TripMate AI will bring together flight information, hotel ideas, and a practical itinerary.</p>
+        </header>
+
+        <section class="planner-card" aria-labelledby="plannerTitle">
+            <div class="card-header">
+                <div>
+                    <h2 id="plannerTitle">Where would you like to go?</h2>
+                    <p>Include your starting point, destination, dates or trip length, and budget for the best results.</p>
+                </div>
+                <div class="status-pill"><span class="status-dot"></span> Ready to plan</div>
+            </div>
+
+            <div class="input-area">
+                <label class="hidden" for="userInput">Describe your travel plans</label>
+                <textarea id="userInput" placeholder="For example: Plan a 7-day trip from Dhaka to Japan in October, with a moderate budget and a mix of food and culture." onkeydown="if (event.ctrlKey && event.key === 'Enter') sendMessage()"></textarea>
+                <button id="sendBtn" type="button" onclick="sendMessage()">
+                    <span id="btnText">Create my plan</span>
+                    <span id="btnLoader" class="loader hidden" aria-label="Planning"></span>
+                </button>
+            </div>
+
+            <div class="quick-prompts" aria-label="Example travel requests">
+                <button type="button" onclick="setPrompt('Plan a 5-day trip to Paris from London with a moderate budget.')">Paris for 5 days</button>
+                <button type="button" onclick="setPrompt('Plan a 7-day Japan trip from Dhaka focused on food and culture.')">Japan food &amp; culture</button>
+                <button type="button" onclick="setPrompt('Plan a relaxing 4-day trip to Dubai for two people.')">Dubai getaway</button>
+            </div>
+            <div id="errorBox" class="error-box hidden" role="alert"></div>
+        </section>
+
+        <section id="resultSection" class="result-section hidden" aria-labelledby="resultTitle">
+            <div class="result-header">
+                <div>
+                    <h2 id="resultTitle">Your travel plan</h2>
+                    <p id="threadInfo"></p>
+                </div>
+                <div class="result-actions">
+                    <button class="copy-btn" type="button" onclick="copyResult()">Copy</button>
+                    <button class="download-btn" type="button" onclick="downloadPDF()">Download PDF</button>
+                </div>
+            </div>
+            <div id="pdfContent" class="pdf-content">
+                <h1 class="pdf-title">Your TripMate AI Travel Plan</h1>
+                <div id="resultBox" class="result-box"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>TripMate AI · Your next trip starts here</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+</html>
